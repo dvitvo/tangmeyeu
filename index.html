@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thư Gửi Mẹ Yêu  💌</title>
+  <style>
+    body {
+      background-color: #ffeaea;
+      font-family: 'Segoe UI', cursive;
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #33b5d6;
+    }
+
+    #letter {
+      display: none;
+      margin-top: 40px;
+      font-size: 1.2em;
+      line-height: 1.6;
+      color: #333;
+      background: #0f99de;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #2a85ed;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button {
+      background-color: #1b89d2;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1em;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #267cde;
+    }
+
+#heart-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  animation: floatUp 4s linear infinite;
+  font-size: 20px;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.5);
+    opacity: 0;
+  }
+}
+  </style>
+</head>
+<body>
+  <audio autoplay loop controls>
+    <source src="LaMeCuaCon-HoangYenChibi-4144125.mp3" type="audio/mp3">
+  </audio>
+  <h1>Gửi đến người Mẹ Vĩ Đại Nhất 💖</h1>
+  <button onclick="showLetter()">Mở thư</button>
+
+  <div id="letter">
+  </div>
+    <div id="heart-container"></div>
+
+  <script>
+    const letterContent = [
+      "Tặng Mẹ,",
+      "Con đã tạo trang này chỉ để nói rằng... Con thương Mẹ rất nhiều.",
+      "Con cảm ơn Mẹ đã luôn quan tâm chăm sóc chúng con từng bữa ăn từng cái mặc.",
+      "Bọn con chưa làm được gì cho Mẹ cả Nhưng bọn con hứa sẽ luôn yêu thương Mẹ. 🌸",
+      "Bởi vì Mẹ là mẹ của tụi Con!"
+    ];
+
+    let paragraphIndex = 0;
+    let charIndex = 0;
+    let typingSpeed = 50; // milliseconds per character
+
+    function typeWriter() {
+      const letterDiv = document.getElementById("letter");
+      if (paragraphIndex < letterContent.length) {
+        if (charIndex < letterContent[paragraphIndex].length) {
+          if (charIndex === 0) {
+            // Create a new paragraph element for each line
+            const p = document.createElement('p');
+            letterDiv.appendChild(p);
+          }
+          const currentParagraph = letterDiv.lastChild;
+          currentParagraph.textContent += letterContent[paragraphIndex].charAt(charIndex);
+          charIndex++;
+          setTimeout(typeWriter, typingSpeed);
+        } else {
+          // Move to the next paragraph
+          paragraphIndex++;
+          charIndex = 0;
+          // Add a small delay before starting the next paragraph
+          setTimeout(typeWriter, typingSpeed * 10);
+        }
+      }
+    }
+
+    function showLetter() {
+      const pass = prompt("Nhập mật khẩu :");
+      if (pass === "vinhvuongvinh" || pass === "02101983") { // Replace with desired password(s)
+        const letterDiv = document.getElementById("letter");
+        letterDiv.style.display = "block";
+        letterDiv.style.opacity = 0;
+        letterDiv.style.transition = "opacity 2s";
+
+        // Start typing effect after the fade-in transition begins
+        setTimeout(() => {
+          letterDiv.style.opacity = 1;
+          typeWriter(); // Start the typing effect
+        }, 100); // Small delay to ensure display is block before fade-in
+      } else {
+        alert("Sai mất rồi... 😢");
+      }
+    }
+
+
+setInterval(() => {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerText = '❤️';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.top = '100vh';
+  document.getElementById('heart-container').appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 4000);
+}, 500);
+  </script>
+</body>
+</html>
